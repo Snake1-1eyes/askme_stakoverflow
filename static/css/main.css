@@ -1,0 +1,87 @@
+main > .container {
+    padding: 90px 15px 0;
+    margin-left: 30px;
+}
+
+.question {
+    border: 1px solid gray;
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.question_image {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.question-title {
+    font-family: "DecoType Naskh";
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.tags {
+    max-width: 100px;
+}
+
+.badge {
+    text-align: center;
+    padding: 5px;
+}
+
+.badge a {
+    color: lavender;
+}
+
+.popular {
+    padding-left: 50px;
+    padding-top: 50px;
+}
+
+.pagination {
+    padding-top: 20px;
+}
+
+.btn-group {
+    margin: 15px;
+    display: flow-root;
+}
+
+.btn-custom {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+    background-image: linear-gradient(to bottom, #5bc0de 0, #2aabd2 100%);
+    background-repeat: repeat-x;
+    border-color: #28a4c9;
+    color: #fff;
+    background-color: #5bc0de;
+}
+
+.btn-custom:hover, .btn-custom:focus {
+    color: #fff;
+
+}
+
+#Textarea {
+    max-width: 750px;
+    max-height: 400px;
+}
+
+.form-control {
+    max-width: 500px;
+    max-height: 100px;
+}
+
+.sett_prof_img {
+    display: block;
+    margin: 10px;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.create {
+    margin-top: 20px;
+}
+

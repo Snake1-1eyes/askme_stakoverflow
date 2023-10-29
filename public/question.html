@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>Question</h1>
+<br>
+<div class="row question1">
+    <div class="col-3">
+        <img src="../static/img/icon_1.png" alt="" class="question_image">
+        <div class="btn-group">
+            <button type="button" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>
+            </button>
+            <button type="button" class="btn btn-info">0</button>
+            <button type="button" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>
+            </button>
+            <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="question-title">{{ question.title }}</div>
+        <div class="question-text">{{ question.content }}</div>
+        <div>
+            <br>
+            <div>Tags: <a href="">Puthon</a>, <a href="">JS</a></div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<h2>Answers</h2>
+<div class="row question answers">
+    <div class="col-3">
+        <img src="../static/img/icon_1.png" alt="" class="question_image">
+        <div class="btn-group">
+            <button type="button" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>
+            </button>
+            <button type="button" class="btn btn-info">0</button>
+            <button type="button" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="question-title">Answer 1.</div>
+        <div class="question-text">The fishtext website will help a designer, layout designer,
+            or webmaster to generate several paragraphs of more or less meaningful fish text in
+            Russian,
+            and a novice speaker to hone his public speaking skills at home. When creating the
+            generator,
+            we used the well-known universal code of speeches. The text is generated randomly in
+            paragraphs
+            from two to ten sentences per paragraph, which allows you to make the
+            text more attractive and lively for visual and auditory perception.
+        </div>
+        <br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+                Correct!
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="row question">
+    <div class="col-3">
+        <img src="../static/img/icon_1.png" alt="" class="question_image">
+        <div class="btn-group">
+            <button type="button" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>
+            </button>
+            <button type="button" class="btn btn-info">0</button>
+            <button type="button" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="question-title">Answer 2.</div>
+        <div class="question-text">The fishtext website will help a designer, layout designer,
+            or webmaster to generate several paragraphs of more or less meaningful fish text in
+            Russian,
+            and a novice speaker to hone his public speaking skills at home. When creating the
+            generator,
+            we used the well-known universal code of speeches. The text is generated randomly in
+            paragraphs
+            from two to ten sentences per paragraph, which allows you to make the
+            text more attractive and lively for visual and auditory perception.
+        </div>
+        <br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+                Correct!
+            </label>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="input-group">
+    <span class="input-group-text">Enter your answer</span>
+    <textarea class="form-control" id="Textarea" aria-label="With textarea"></textarea>
+</div>
+<br>
+<button type="button" class="btn btn-secondary">Answer</button>
+{% endblock %}
