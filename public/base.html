@@ -29,12 +29,23 @@
 
         }
 
+        .lav {
+            display: compact;
+            padding-left: 10px;
+            margin-left: 600px;
+        }
+
         .prof {
             padding-left: 400px;
         }
 
         #navbarCollapse {
             padding-left: 300px;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 20px;
         }
 
         .prof_img {
@@ -70,12 +81,19 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Ask!</button>
                 </form>
+                {% if is_authorized %}
+                <nav class="lav">
+                    <a class="nav-link" href="{% url 'signup' %}">Register</a>
+                    <a class="nav-link" href="{% url 'login' %}">Log in</a>
+                </nav>
+                {% else %}
                 <span class="prof"><img src="{% static '/img/icon_1.png' %}" alt="" class="prof_img"></span>
                 <nav class="nav">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">User name</a>
-                    <a class="nav-link" href="#">Settings</a>
+                    <a class="nav-link" href="{% url 'setting' %}">Settings</a>
                     <a class="nav-link" href="#">log out</a>
                 </nav>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -103,26 +121,12 @@
 
                     <h2>Best members</h2>
                     <ul class="list-group">
+                        {% for member in members %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            A list item
-                            <span class="badge bg-primary rounded-pill">14</span>
+                            {{ member.text }}
+                            <span class="badge bg-primary rounded-pill">{{ member.raiting }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            A second list item
-                            <span class="badge bg-primary rounded-pill">12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            A third list item
-                            <span class="badge bg-primary rounded-pill">9</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            A fourth list item
-                            <span class="badge bg-primary rounded-pill">7</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            A fifth list item
-                            <span class="badge bg-primary rounded-pill">4</span>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -130,6 +134,7 @@
     </div>
 </main>
 
+{% if is_paginate %}
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item disabled">
@@ -143,10 +148,11 @@
         </li>
     </ul>
 </nav>
+{% endif %}
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted"></span>
+        <span class="text-muted">By Snake</span>
     </div>
 </footer>
 

@@ -5,32 +5,12 @@
 
 
 <h1>Questions</h1><br>
-<h5><a href="">Ask a Question</a></h5>
+<h5><a href="{% url 'ask' %}">Ask a Question</a></h5>
 
 {% for question in questions %}
 
-<div class="row question">
-    <div class="col-3">
-        <img src="{% static '/img/icon_1.png' %}" alt="" class="question_image">
-        <div class="btn-group">
-            <button type="button" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>
-            </button>
-            <button type="button" class="btn btn-info">0</button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>
-            </button>
-        </div>
-        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
-    </div>
-    <div class="col-9">
-        <div class="question-title"><a href="{% url 'question' question_id=question.id %}">{{ question.title }}</a></div>
-        <div class="question-text">{{ question.content }}
-        </div>
-        <div>
-            <a href="">Answers(3)</a>
-            <div>Tags: <a href="">Python</a>, <a href="">JS</a></div>
-        </div>
-    </div>
-</div>
+{% include 'components/question_item.html'%}
+
 {% endfor %}
 
 

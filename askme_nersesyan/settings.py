@@ -60,6 +60,9 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'app.best_processors.best_processor',
+                'app.paginate_processors.paginator_processor',
+                'app.context_processors.sections_processor',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
