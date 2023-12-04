@@ -39,9 +39,6 @@ main > .container {
     padding-top: 50px;
 }
 
-.pagination {
-    padding-top: 20px;
-}
 
 .btn-group {
     margin: 15px;
@@ -84,4 +81,3 @@ main > .container {
 .create {
     margin-top: 20px;
 }
-

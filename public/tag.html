@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-<h1>Tag: Python</h1>
+<h1>Tag: {{ tag.tag_name }}</h1>
 
-{% for question in questions %}
+{% for question in items %}
 
 {% include 'components/question_item.html'%}
 
 {% endfor %}
-
+{% include 'components/paginator.html' %}
 {% endblock %}

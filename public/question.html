@@ -9,7 +9,7 @@
 <br>
 <h2>Answers</h2>
 
-{% for answer in answers %}
+{% for answer in items %}
 {% include 'components/answer_item.html'%}
 {% endfor %}
 <br>
@@ -21,4 +21,7 @@
 <br>
 <button type="button" class="btn btn-secondary">Answer</button>
 
+{% include 'components/paginator.html' %}
+
 {% endblock %}
+

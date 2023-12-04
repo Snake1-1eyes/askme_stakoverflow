@@ -5,17 +5,17 @@
         <div class="btn-group">
             <button type="button" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>
             </button>
-            <button type="button" class="btn btn-info">0</button>
+            <button type="button" class="btn btn-info">{{ question.rating_count }}</button>
             <button type="button" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>
             </button>
         </div>
     </div>
     <div class="col-9">
-        <div class="question-title">{{ answer.title }}</div>
-        <div class="question-text">{{ answer.content }}
+        <div class="question-title"></div>
+        <div class="question-text">{{ answer.body }}
             <br>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" {% if answer.correctness %}checked{% endif %} style="pointer-events: none;">
                 <label class="form-check-label" for="flexCheckChecked">
                     Correct!
                 </label>

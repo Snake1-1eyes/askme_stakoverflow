@@ -1,0 +1,28 @@
+ {% if items.paginator.num_pages > 1 %}
+    <nav>
+      <ul class="pagination justify-content-center mt-5">
+
+            {% if items.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+
+            {% for i in page_range|default_if_none:items.paginator.get_elided_page_range %}
+                {% if items.number == i %}
+                    <li class="active page-item"><span class="page-link">{{ i }} </span>
+                    </li>
+                {% else %}
+                    {% if i == items.paginator.ELLIPSIS %}
+                        <li class="page-item"><span class="page-link">{{ i }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if items.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">&raquo;</a></li>
+            {% endif %}
+
+      </ul>
+    </nav>
+    {% endif %}

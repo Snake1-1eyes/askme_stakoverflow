@@ -7,11 +7,13 @@
 <h1>Questions</h1><br>
 <h5><a href="{% url 'ask' %}">Ask a Question</a></h5>
 
-{% for question in questions %}
+{% for question in items %}
 
 {% include 'components/question_item.html'%}
 
 {% endfor %}
+
+{% include 'components/paginator.html' %}
 
 
 {% endblock %}
