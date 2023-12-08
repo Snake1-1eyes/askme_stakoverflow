@@ -1,46 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
 
 {% block content %}
 
 <h1>Registration</h1><br>
-<label class="error">Sorry, this email adress allready registred!</label>
-<div class="mb-3 row">
-    <label for="inputLogin" class="col-sm-2 col-form-label">Login</label>
-    <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputLogin">
-    </div>
-</div>
-<div class="mb-3">
-    <div class="mb-3 row">
-        <label for="Email" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="Email"
-                   placeholder="email@example.com">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="NickName" class="col-sm-2 col-form-label">NickName</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="NickName">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="repeatPassword" class="col-sm-2 col-form-label">Repeat Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="repeatPassword">
-        </div>
-    </div>
-    <label for="formFileMultiple" class="form-label"></label>
-    <input class="form-control" type="file" id="formFileMultiple" multiple><br>
-    <button type="button" class="btn btn-primary">Register!</button>
-</div>
 
+
+<form method="post">
+    {% bootstrap_form form %}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Register!</button>
+</form>
 
 {% endblock %}

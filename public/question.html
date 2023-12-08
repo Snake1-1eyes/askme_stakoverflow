@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-{% load static %}
 
 <h1>Question</h1>
 <br>
@@ -10,18 +11,40 @@
 <h2>Answers</h2>
 
 {% for answer in items %}
-{% include 'components/answer_item.html'%}
+{% include 'components/answer_item.html' %}
 {% endfor %}
-<br>
 
-<div class="input-group">
-    <span class="input-group-text">Enter your answer</span>
-    <textarea class="form-control" id="Textarea" aria-label="With textarea"></textarea>
-</div>
-<br>
-<button type="button" class="btn btn-secondary">Answer</button>
 
 {% include 'components/paginator.html' %}
+
+
+{% if request.user.is_authenticated %}
+<h3 class="h3 text-center headers mt-5">Your answer</h3>
+<hr/>
+
+    <form method="post">
+    {% bootstrap_form form %}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Ask!</button>
+</form>
+{% endif %}
+<br>
+
+{% if not request.user.is_authenticated %}
+<div class="border border-warning rounded p-3">
+    <h3 class="h4 text-center ">Please, authorize to add an answer!</h3>
+</div>
+<div class="m-3 text-center">
+    <a href="{% url 'login' %}?continue={{ request.path }}?{{ request.GET.urlencode }}">
+        <p>Login!</p>
+    </a>
+    <span>&nbsp;</span>
+    <a href="{% url 'signup' %}?continue={{ request.path }}?{{ request.GET.urlencode }}">
+        <p>Sign up!</p>
+    </a>
+</div>
+{% endif %}
+<br>
 
 {% endblock %}
 

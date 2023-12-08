@@ -1,10 +1,11 @@
 from django.db import models
-#from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db.models import Count
 
+
 # Create your models here.
-#User = get_user_model()
+# User = get_user_model()
 
 
 class QuestionManager(models.Manager):
@@ -47,6 +48,10 @@ class AnswerManager(models.Manager):
 
     def right_question_answers(self, question_id):
         return self.question_answers(question_id).order_by('correctness').reverse()
+
+    def last_right_question_answers(self, question_id):
+        return (self.question_answers(question_id).
+                order_by('correctness', 'date').reverse().filter(correctness=True).last())
 
 
 class Answer(models.Model):

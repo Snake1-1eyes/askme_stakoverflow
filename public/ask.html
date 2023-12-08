@@ -1,23 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-{% load static %}
+
 
 <h1>New question</h1>
-<div class="mb-3">
-    <label for="Question" class="form-label">Enter question</label>
-    <input type="text" class="form-control" id="Question"
-           placeholder="How..?">
-</div>
-<div class="mb-3">
-    <label for="Textarea" class="form-label">Text</label>
-    <textarea class="form-control" id="Textarea" rows="3"></textarea>
-</div>
-<div class="mb-3">
-    <label for="tags" class="form-label">Tags</label>
-    <input type="text" class="form-control" id="tags"
-           placeholder="Python, JS">
-</div>
-<button type="button" class="btn btn-secondary">Ask!</button>
+
+<form method="post">
+    {% bootstrap_form form %}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Ask!</button>
+</form>
+
 
 {% endblock %}
