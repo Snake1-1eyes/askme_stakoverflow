@@ -98,8 +98,6 @@ def ask(request):
 # reverse('index')
 @csrf_protect
 def login(request):
-    print(request.GET)
-    print(request.POST)
     if request.method == "GET":
         login_form = LoginForm()
     if request.method == "POST":

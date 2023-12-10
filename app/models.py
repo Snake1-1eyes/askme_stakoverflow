@@ -1,11 +1,6 @@
 from django.db import models
-# from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db.models import Count
-
-
-# Create your models here.
-# User = get_user_model()
 
 
 class QuestionManager(models.Manager):

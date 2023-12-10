@@ -29,7 +29,6 @@ class RegisterForm(forms.ModelForm):
     def clean_password(self):
         password = self.cleaned_data.get('password')
         char_set = {'@', '.', '+', '-', '_', '&', '*'}
-        print(password)
         for i in password:
             if i in char_set:
                 return password
@@ -146,3 +145,4 @@ class NewAnswerForm(forms.ModelForm):
                                          body=self.cleaned_data.get('body'),
                                          correctness=False)
         return answer
+
