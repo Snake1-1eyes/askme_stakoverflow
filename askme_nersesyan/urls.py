@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -29,4 +31,9 @@ urlpatterns = [
     path('logout/', views.logout, name="logout"),
     path('profile/edit', views.setting, name='setting'),
     path('admin/', admin.site.urls),
+    path('vote', views.vote, name='vote'),
+    path('correctness', views.correctness, name='correctness'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

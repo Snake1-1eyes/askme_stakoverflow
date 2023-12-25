@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_protect
 
@@ -43,7 +44,7 @@ def tag(request, tag_id):
     page, page_range = paginate(Question.objects.tag_questions(tag_id), request.GET.get('page', 1))
     return render(request, "tag.html", {'items': page, 'page_range': page_range, 'tag': tag_item})
 
-
+@csrf_protect
 def question(request, question_id):
     item = get_object_or_404(Question.objects.all(), id=question_id)
     user = request.user
@@ -64,6 +65,12 @@ def question(request, question_id):
             anchor = 'question' if anchor_answer is None else str(anchor_answer.id)
             return redirect(reverse('question', args=[question_id]) + '#' + anchor)
 
+    if user.is_authenticated:
+        profile = Profile.objects.get(user=user)
+        belonging = True if item.author == profile else False
+    else:
+        belonging = False
+
     page, page_range = paginate(Answer.objects.right_question_answers(item.id), request.GET.get('page', 1))
     return render(request, "question.html",
                   {'question': item, 'belonging': belonging, 'items': page,
@@ -76,7 +83,7 @@ def setting(request):
     if request.method == 'GET':
         edit_profile_form = EditProfileForm(instance=request.user)
     if request.method == 'POST':
-        edit_profile_form = EditProfileForm(request.POST, instance=request.user)
+        edit_profile_form = EditProfileForm(request.POST, request.FILES,  instance=request.user)
         if edit_profile_form.is_valid():
             user = edit_profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
@@ -125,7 +132,7 @@ def signup(request):
     if request.method == 'GET':
         register_form = RegisterForm()
     if request.method == 'POST':
-        register_form = RegisterForm(request.POST)
+        register_form = RegisterForm(request.POST, request.FILES)
         if register_form.is_valid():
             try:
                 user = register_form.save()
@@ -134,3 +141,34 @@ def signup(request):
             except IntegrityError:
                 register_form.add_error(None, 'This User already exists!')
     return render(request, 'signup.html', {'form': register_form})
+
+
+@csrf_protect
+@login_required(login_url='login', redirect_field_name='continue')
+def vote(request):
+    id_ = request.POST.get('id')
+    type_ = request.POST.get('type')
+    if type_ == "question":
+        item = get_object_or_404(Question.objects.all(), id=id_)
+    else:
+        item = get_object_or_404(Answer.objects.all(), id=id_)
+    item.toggle_rating(request.user.profile.id)
+    count = item.rating_count()
+    return JsonResponse({'count': count})
+
+
+@csrf_protect
+def correctness(request):
+    answer_id = request.POST.get('answer_id')
+    question_id = request.POST.get('question_id')
+    answer = get_object_or_404(Answer.objects.all(), id=answer_id)
+    question_ = get_object_or_404(Question.objects.all(), id=question_id)
+    if question_.author_id == request.user.profile.id:
+        if answer.correctness:
+            answer.correctness = False
+        else:
+            answer.correctness = True
+        answer.save()
+        return JsonResponse({'success': 1})
+    else:
+        return JsonResponse({'success': 2})

@@ -1,14 +1,25 @@
 {% load static %}
 <div class="row question">
     <div class="col-3">
+        {% if question.author.avatar %}
+        <img class="user_avatar" src="{{ question.author.avatar.url }}" style="margin-left: auto; max-height: 100px" alt="Avatar">
+        {% else %}
         <img src="{% static '/img/icon_1.png' %}" alt="" class="question_image">
+        {% endif %}
+        <div>User: {{ question.author.user.first_name }}</div>
+        {% if request.user.profile.id in question.check_rating %}
         <div class="btn-group">
-            <button type="button" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>
-            </button>
-            <button type="button" class="btn btn-info">{{ question.rating_count }}</button>
-            <button type="button" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>
-            </button>
+            <button class="btn btn-danger vote unvoted" data-id="{{ question.id }}" data-type="question"
+                    type="submit"><i class="fa fa-thumbs-o-down"></i></button>
+            <span class="btn bg-warning counter">{{ question.rating_count }}</span>
         </div>
+        {% else %}
+        <div class="btn-group">
+            <button class="btn btn-success vote voted" data-id="{{ question.id }}" data-type="question"
+                    type="submit"><i class="fa fa-thumbs-o-up"></i></button>
+            <span class="btn btn-info counter">{{ question.rating_count }}</span>
+        </div>
+        {% endif %}
         <script src="https://use.fontawesome.com/fe459689b4.js"></script>
     </div>
     <div class="col-9">
@@ -19,7 +30,7 @@
             <a href="{% url 'question' question_id=question.id %}">Answers({{ question.answers_count }})</a>
             <div>Tags:</div>
             {% for tag in question.tags_list %}
-                <div><a href="{% url 'tag' tag_id=tag.id %}">{{ tag.tag_name }}</a></div>
+            <div><a href="{% url 'tag' tag_id=tag.id %}">{{ tag.tag_name }}</a></div>
             {% endfor %}
         </div>
     </div>

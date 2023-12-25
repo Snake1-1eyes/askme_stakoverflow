@@ -61,6 +61,7 @@ class RegisterForm(forms.ModelForm):
             profile.avatar = None
         else:
             profile.avatar = self.cleaned_data.get('avatar')
+            profile.save()
         return user
 
 
@@ -83,6 +84,15 @@ class EditProfileForm(forms.ModelForm):
         if len(username) < 30 and re.fullmatch(r'(\d|\w|@|\.|\+|-)*', username):
             return username
         raise forms.ValidationError('Login does not meet the requirements')
+
+    def save(self, **kwargs):
+        user = super().save(**kwargs)
+        avatar = self.cleaned_data.get('avatar')
+        if avatar:
+            profile = user.profile
+            profile.avatar = avatar
+            profile.save()
+        return user
 
 
 class NewQuestionForm(forms.ModelForm):

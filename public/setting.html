@@ -8,16 +8,23 @@
 <br>
 <h1>Settings: {{ request.user.first_name }}</h1><br>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% if messages %}
-        <div class="border border-2 border-success rounded p-3 mb-3">
+    <div class="border border-2 border-success rounded p-3 mb-3">
         {% for message in messages %}
-            <strong {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}</strong>
+        <strong {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}</strong>
         {% endfor %}
-        </div>
+    </div>
     {% endif %}
     {% bootstrap_form form %}
     {% csrf_token %}
+
+    {% if request.user.profile.avatar %}
+    <div>
+        <img class="rounded w-75 mx-auto d-block mb-4 mt-2 " src="{{ request.user.profile.avatar.url }}" alt="Avatar">
+    </div>
+    {% endif %}
+
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
